@@ -1,22 +1,23 @@
 @navigate
-Feature: User should see correct page url after navigating to the top menu
+Feature: Navigation Menu
 
 
-  Scenario: navigate from Fleet to Vehicles module
+  @db
+  Scenario: Fleet --> Vehicles
     Given the user is on the login page
     And the user enter the sales manager information
-    When the user goes to Fleet, Vehicle
-    Then the url should be expected fleet url
+    When the user navigates to Fleet, Vehicles
+    Then the url should be expected Fleet url
 
-  Scenario: navigate from Marketing to Campaigns module
+  Scenario: Sales managers - Marketing—> Campaigns navigation
     Given the user is on the login page
     And the user enter the sales manager information
-    When the user goes to Campaigns module
-    Then the url should be expected campaign url
+    When  the user navigates Marketing Campaigns
+    Then the url should be expected Campaigns url
 
-
-  Scenario: navigate from Activities to Calender events module
+  @store_manager
+  Scenario: Activities—> Calendar Events
     Given the user is on the login page
     And the user enter the sales manager information
-    When the user goes to Calender module
-    Then the user should see expected calendar event url
+    When the user navigates Activities - Calendar events
+    Then the url should be expected Activities url

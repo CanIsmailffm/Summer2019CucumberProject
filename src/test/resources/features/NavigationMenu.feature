@@ -2,6 +2,7 @@
 Feature: Navigation Menu
 
 
+  @db
   Scenario: Fleet --> Vehicles
     Given the user is on the login page
     And the user enter the sales manager information
@@ -14,6 +15,7 @@ Feature: Navigation Menu
     When  the user navigates Marketing Campaigns
     Then the url should be expected Campaigns url
 
+  @store_manager
   Scenario: Activities—> Calendar Events
     Given the user is on the login page
     And the user enter the sales manager information
