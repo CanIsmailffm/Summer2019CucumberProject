@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 public class LoginStepDefs {
     @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() throws InterruptedException {
+    public void the_user_is_on_the_login_page()  {
         System.out.println("Opening the login page");
         //Driver.get()--> this gets the webdriver
         //driver ==Driver.get()
@@ -18,7 +18,7 @@ public class LoginStepDefs {
         Driver.get().get(url);
     }
     @When("the user enter the driver information")
-    public void the_user_enter_the_driver_information() throws InterruptedException {
+    public void the_user_enter_the_driver_information()  {
         BrowserUtils.waitFor(5);
         LoginPage loginPage = new LoginPage();
         String username = ConfigurationReader.get("driver_username");
@@ -26,8 +26,8 @@ public class LoginStepDefs {
         loginPage.login(username,password);
     }
     @Then("the user should be able to login")
-    public void the_user_should_be_able_to_login() throws InterruptedException {
-        BrowserUtils.waitFor(5);
+    public void the_user_should_be_able_to_login()  {
+        BrowserUtils.waitFor(4);
         String actualTitle = Driver.get().getTitle();
         Assert.assertEquals("Dashboard",actualTitle);
     }
@@ -57,8 +57,30 @@ public class LoginStepDefs {
 
     @Then("the title should contains {string}")
     public void the_title_should_contains(String expectedTitle) {
-        System.out.println("expectedTitle: " + expectedTitle);
-        Assert.assertTrue(Driver.get().getTitle().contains(expectedTitle));
+        BrowserUtils.waitFor(1);
+        System.out.println("expectedTitle = " + expectedTitle);
+        Assert.assertTrue("Actual title:"+Driver.get().getTitle(),Driver.get().getTitle().contains(expectedTitle));
+
+    }
+
+    @Given("the user logged in as a {string}")
+    public void the_user_logged_in_as_a(String user) {
+        String url = ConfigurationReader.get("url");
+        Driver.get().get(url);
+        String username = null;
+        String password = null;
+        if(user.equals("driver")){
+            username = ConfigurationReader.get("driver_username");
+            password = ConfigurationReader.get("driver_password");
+        }else if(user.equals("sales manager")){
+            username = ConfigurationReader.get("sales_manager_username");
+            password = ConfigurationReader.get("sales_manager_password");
+        }else if(user.equals("store manager")){
+            username = ConfigurationReader.get("store_manager_username");
+            password = ConfigurationReader.get("store_manager_password");
+        }
+        LoginPage loginPage = new LoginPage();
+        loginPage.login(username,password);
     }
 
 }
