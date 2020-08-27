@@ -47,7 +47,7 @@ public class ContactsStepDefs {
     @When("the user click the {string} from contacts")
     public void the_user_click_the_from_contacts(String email) {
 
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitFor(5);
         //click the row with the email
         ContactsPage contactsPage = new ContactsPage();
         contactsPage.getContactEmail(email).click();

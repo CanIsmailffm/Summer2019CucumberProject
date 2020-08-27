@@ -12,16 +12,17 @@ import java.util.concurrent.TimeUnit;
 public class Hooks {
     @Before("@db")
     public void setUpDatabase(){
-        System.out.println("Creating database connection...");
+        System.out.println("Creating database connection....");
         DBUtils.createConnection();
     }
     @Before
     public void setUp(){
-        Driver.get().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Driver.get().manage().window().fullscreen();
     }
     @After("@db")
     public void tearDownDatabase(){
+
         System.out.println("Closing database connection...");
         DBUtils.destroyConnection();
     }
